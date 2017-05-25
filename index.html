@@ -51,21 +51,15 @@
       });
 
       //// Create Firepad.
-      var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-        defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
-      });
+      var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror);
     }
 
     // Helper to get hash from end of URL or generate a random one.
     function getExampleRef() {
       var ref = firebase.database().ref();
-      var hash = window.location.hash.replace(/#/g, '');
-      if (hash) {
-        ref = ref.child(hash);
-      } else {
-        ref = ref.push(); // generate unique location.
-        window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
-      }
+      var DOC_HASH = "-Kkx_YGnVdEZUjUxZEXD"; // Hardcoded ID in firebase database
+      ref = ref.child(DOC_HASH);
+
       if (typeof console !== 'undefined') {
         console.log('Firebase data: ', ref.toString());
       }
